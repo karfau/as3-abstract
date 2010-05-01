@@ -1,0 +1,9 @@
+I have heard some discussions about how one could "simulate" the missing possibility for abstract classes.
+
+So from all that and my own expierience I build a small lib (works with FP9 and higher).
+
+At the moment I am using it for one Project in the university and it still needs to get testet more then in the showcase.
+
+All lib-Files are well documented, so take the time an read the docs of those four files, to see if u like it.
+
+I have some problem generating asdoc from the files right now, so reading it in the sourcefiles is the way to go.
