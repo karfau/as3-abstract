@@ -1,8 +1,6 @@
 package
 {
 	
-	use namespace abstract;
-	
 	/**
 	 * Allowes to verify that the class <code><i>thisObject</i></code> is  an instance of,
 	 * extends <code><i>abstractType</i></code> and implements <code><i>forcedInterface</i></code>,
