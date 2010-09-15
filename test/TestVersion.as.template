@@ -1,0 +1,7 @@
+package
+{
+	public class TestVersion
+	{
+		public static const CompileTime:String = "/*replace with readable timestamp*/";
+	}
+}
