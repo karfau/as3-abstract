@@ -1,0 +1,14 @@
+﻿//TODO: allow forcing interface implementation (inheriting their abstract methods)
+//TODO: what about checking abstract methods (would introduce desribeType-Reflection?)...
+/*one way could be a check where the method that would get called is implemented.
+- if the abstract class really implements the interface, it needs to implement all the mehtods
+- [Abstract] would enable us to check if methods are implemnted
+!evaluate possibilities with gains/flaws, maybe make this an extra version
+*/
+//TODO: allow the same mechanism for extensions of existing classes that are not objects
+//TODO: what about a "multiple Abstract-heirarchy", ...
+/* a) is it enough to only check the last abstractClass?
+b) if not, it would require all earlier abstract classes to allow access to the
+abstractClass-constructor-parameter (this way implementiing classes could avoid the test
+by setting a wrong class.)
+*/

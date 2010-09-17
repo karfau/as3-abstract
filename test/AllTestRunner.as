@@ -22,7 +22,7 @@ package
 				 traceSprite.y = 20;
 			 this.addChild(traceSprite);*/
 			core = new TextCore();
-			core.start(AllTests, null, this);
+			core.start(_AllTests, null, this);
 		}
 	}
 }
