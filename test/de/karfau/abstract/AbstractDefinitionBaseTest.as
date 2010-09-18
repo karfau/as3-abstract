@@ -20,7 +20,7 @@ package de.karfau.abstract
 		
 		public var instance:Object;
 		
-		public function get instanceType ():Class {
+		public function get AbstractDefinition ():Class {
 			return AbstractDefinitionBase;
 		}
 		
@@ -29,7 +29,7 @@ package de.karfau.abstract
 		[Before]
 		public function setUp ():void {
 			assertThat(instance, nullValue());
-			assertThat(instanceType, notNullValue());
+			assertThat(AbstractDefinition, notNullValue());
 			assertThat(error, nullValue());
 		}
 		
@@ -39,11 +39,11 @@ package de.karfau.abstract
 		[Should("throw ArgumentError")]
 		public function abstract_definitions_can_not_be_instanciated_without_parameters ():void {
 			try {
-				instance = new instanceType();
+				instance = new AbstractDefinition();
 			} catch (error:Error) {
 				this.error = error;
 			}
-			verifyErrorTypeAndMessage(ArgumentError, ["Error #1063:", getQualifiedClassName(instanceType)]);
+			verifyErrorTypeAndMessage(ArgumentError, ["Error #1063:", getQualifiedClassName(AbstractDefinition)]);
 		}
 		
 		[Test]
@@ -52,7 +52,7 @@ package de.karfau.abstract
 		[Should("throw ArgumentError")]
 		public function abstract_definitions_can_not_be_instanciated_with_null_param ():void {
 			try {
-				instance = new instanceType(null);
+				instance = new AbstractDefinition(null);
 			} catch (error:Error) {
 				this.error = error;
 			}
@@ -65,11 +65,11 @@ package de.karfau.abstract
 		[Should("throw ArgumentError because abstracClass has to be implemented by instance")]
 		public function abstractDefinition_verifies_it_implements_abstractClass ():void {
 			try {
-				instance = new instanceType(TypeNotInherited);
+				instance = new AbstractDefinition(TypeNotInherited);
 			} catch (error:Error) {
 				this.error = error;
 			}
-			verifyErrorTypeAndMessage(ArgumentError, [TypeNotInherited, instanceType]);
+			verifyErrorTypeAndMessage(ArgumentError, [TypeNotInherited, AbstractDefinition]);
 		}
 		
 		[Test]
@@ -78,11 +78,11 @@ package de.karfau.abstract
 		[Should("throw AbstractError because abstract definitions can not be instancieted")]
 		public function abstractDefinition_verifies_abstractClass_does_not_equal_the_definition ():void {
 			try {
-				instance = new instanceType(instanceType);
+				instance = new AbstractDefinition(AbstractDefinition);
 			} catch (error:Error) {
 				this.error = error;
 			}
-			verifyErrorTypeAndMessage(AbstractError, [instanceType, "abstract"]);
+			verifyErrorTypeAndMessage(AbstractError, [AbstractDefinition, "abstract"]);
 		}
 		
 		[After]

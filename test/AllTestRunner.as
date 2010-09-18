@@ -22,6 +22,8 @@ package
 				 traceSprite.y = 20;
 			 this.addChild(traceSprite);*/
 			core = new TextCore();
+			core.displayPerformanceDetails = true;
+			core.traceOnComplete = true;
 			core.start(_AllTests, null, this);
 		}
 	}

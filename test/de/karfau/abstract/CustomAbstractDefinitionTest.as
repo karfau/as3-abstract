@@ -2,10 +2,12 @@ package de.karfau.abstract
 {
 	import de.karfau.abstract.examples.CustomAbstractDefinition;
 	
-	public class AbstractDefinitionTest extends AbstractDefinitionBaseTest
+	import flash.utils.describeType;
+	
+	public class CustomAbstractDefinitionTest extends AbstractDefinitionBaseTest
 	{
 		
-		public override function get instanceType ():Class {
+		public override function get AbstractDefinition ():Class {
 			return CustomAbstractDefinition;
 		}
 		
@@ -31,6 +33,7 @@ package de.karfau.abstract
 		
 		[Test]
 		public override function abstractDefinition_verifies_abstractClass_does_not_equal_the_definition ():void {
+			var descr:XML = describeType(this);
 			super.abstractDefinition_verifies_abstractClass_does_not_equal_the_definition();
 		}
 		
