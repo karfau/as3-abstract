@@ -6,7 +6,7 @@ package de.karfau.abstract
 		public function AbstractDefinitionBase (abstractClass:Class) {
 			var type:Class = Object(this).constructor;
 			if (abstractClass == null)
-				throw new ArgumentError("abstractClass was " + abstractClass);
+				throw new ArgumentError("abstractClass was " + null);
 			if (!(this is abstractClass))
 				throw new ArgumentError(abstractClass + " is not implemented by " + type);
 			if (type == abstractClass)

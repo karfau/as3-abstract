@@ -5,10 +5,6 @@ package de.karfau.abstract
 	public class AbstractDefinitionTest extends AbstractDefinitionBaseTest
 	{
 		
-		public override function get abstractClassParameter ():Class {
-			return instanceType;
-		}
-		
 		public override function get instanceType ():Class {
 			return CustomAbstractDefinition;
 		}
@@ -24,9 +20,18 @@ package de.karfau.abstract
 		}
 		
 		[Test]
-		public override function abstractDefinition_verifies_it_is_a_subClass_of_abstractClass ():void {
-			super.abstractDefinition_verifies_it_is_a_subClass_of_abstractClass();
+		public override function abstract_definitions_can_not_be_instanciated_with_null_param ():void {
+			super.abstract_definitions_can_not_be_instanciated_with_null_param();
+		}
 		
+		[Test]
+		public override function abstractDefinition_verifies_it_implements_abstractClass ():void {
+			super.abstractDefinition_verifies_it_implements_abstractClass();
+		}
+		
+		[Test]
+		public override function abstractDefinition_verifies_abstractClass_does_not_equal_the_definition ():void {
+			super.abstractDefinition_verifies_abstractClass_does_not_equal_the_definition();
 		}
 		
 		[After]

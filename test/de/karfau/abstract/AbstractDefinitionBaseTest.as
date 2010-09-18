@@ -24,16 +24,12 @@ package de.karfau.abstract
 			return AbstractDefinitionBase;
 		}
 		
-		public function get abstractClassParameter ():Class {
-			return TypeNotInherited;
-		}
 		public var error:Error;
 		
 		[Before]
 		public function setUp ():void {
 			assertThat(instance, nullValue());
 			assertThat(instanceType, notNullValue());
-			assertThat(abstractClassParameter, notNullValue());
 			assertThat(error, nullValue());
 		}
 		
@@ -52,27 +48,51 @@ package de.karfau.abstract
 		
 		[Test]
 		[Given("An abstract definition")]
-		[When("the constructor is called with abstracClass is a class")]
-		[Should("throw ArgumentError if instance doesn't implemented abstractClass")]
-		[Should("throw AbstractError if instance is not a _SUB_Class of abstractClass")]
-		public function abstractDefinition_verifies_it_is_a_subClass_of_abstractClass ():void {
+		[When("the constructor is called with abstracClass is null")] /*abstracClass is null*/
+		[Should("throw ArgumentError")]
+		public function abstract_definitions_can_not_be_instanciated_with_null_param ():void {
 			try {
-				instance = new instanceType(abstractClassParameter);
+				instance = new instanceType(null);
 			} catch (error:Error) {
 				this.error = error;
 			}
-			if (abstractClassParameter != instanceType)
-				verifyErrorTypeAndMessage(ArgumentError, [abstractClassParameter, instanceType]);
-			else
-				verifyErrorTypeAndMessage(AbstractError, [instanceType, "abstract"]);
+			verifyErrorTypeAndMessage(ArgumentError, ["abstractClass", "" + null]);
+		}
+		
+		[Test]
+		[Given("An abstract definition")]
+		[When("the constructor is called with abstracClass is a class not implemented by instance")]
+		[Should("throw ArgumentError because abstracClass has to be implemented by instance")]
+		public function abstractDefinition_verifies_it_implements_abstractClass ():void {
+			try {
+				instance = new instanceType(TypeNotInherited);
+			} catch (error:Error) {
+				this.error = error;
+			}
+			verifyErrorTypeAndMessage(ArgumentError, [TypeNotInherited, instanceType]);
+		}
+		
+		[Test]
+		[Given("An abstract definition")]
+		[When("the constructor is called with the abstract definition as abstractClass")]
+		[Should("throw AbstractError because abstract definitions can not be instancieted")]
+		public function abstractDefinition_verifies_abstractClass_does_not_equal_the_definition ():void {
+			try {
+				instance = new instanceType(instanceType);
+			} catch (error:Error) {
+				this.error = error;
+			}
+			verifyErrorTypeAndMessage(AbstractError, [instanceType, "abstract"]);
 		}
 		
 		[After]
 		public function tearDown ():void {
 			instance = null;
+			//abstractClassParameter = null;
 			error = null;
 		}
 		
+		//TODO: create custom matcher?
 		protected function verifyErrorTypeAndMessage (expectedType:Class, expectedInMessage:Array):void {
 			//assertTrue(error != null && error is expectedType);
 			assertThat(error, both(notNullValue(), isA(expectedType)));
