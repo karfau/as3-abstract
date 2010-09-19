@@ -1,9 +1,32 @@
-I have heard some discussions about how one could "simulate" the missing possibility for abstract classes.
+As there are some ways to simulate abstract classes in Actionscript, and in the last projects I thought about it over and over, 
+I felt it was time for a well defined way to do it: as3-abstract was born.
 
-So from all that and my own expierience I build a small lib (works with FP9 and higher).
+It was first developed in parallel to a bigger project which made heavy use of it: http://github.com/karfau/parallelpaint-client .
+There where no tests at all, wich bothered me.
 
-At the moment I am using it for one Project in the university and it still needs to get testet more then in the showcase.
+And as I recently had some time to finally get my hands on the TDD approach, i decided it was time to rewrite this small lib from scratch.
 
-All lib-Files are well documented, so take the time an read the docs of those four files, to see if u like it.
+So the master-branch currently is at version 0.3 and is not going to be devloped further. 
+The new active branch is tdd, and it will be the main branch until i reached all features of the current master.
+I hope that the result will be compatible with the old master, but this will not be my main goal, as the tests are already "guiding my code".
 
-I have some problem generating asdoc from the files right now, so reading it in the sourcefiles is the way to go.
+If u have any suggestions or questions feel free to ask/comment/fork/etc.
+
+---
+
+Things this should provide for a 1.0:
+
+-Abstract classes should be defined in a simple and secure way, adhering to DRY
+-All verification should be done as early as possible: at construction time.
+-Abstract classes can not be instanciated.
+-Abstract classes provide common behaviour for interface-implementation.
+-Abstract classes can define "abstract methods" which need to be implemented by extending/implementing classes to become concrete.
+
+---
+
+Things i came up with so far:
+
+An AbstractDefinition is a class wich "replaces the missing language-feature":
+it exists to verify the abstractness of a class as early as possible: at construction-time.
+Currently it cn not be instanciated and the constructor provides one argument:
+abstractClass:Class wich is used to verify that the created instance is a _sub_-class of abstractClass.
