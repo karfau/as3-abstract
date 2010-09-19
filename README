@@ -16,11 +16,12 @@ If u have any suggestions or questions feel free to ask/comment/fork/etc.
 
 Things this should provide for a 1.0:
 
--Abstract classes should be defined in a simple and secure way, adhering to DRY
--All verification should be done as early as possible: at construction time.
--Abstract classes can not be instanciated.
--Abstract classes provide common behaviour for interface-implementation.
--Abstract classes can define "abstract methods" which need to be implemented by extending/implementing classes to become concrete.
+- Abstract classes should be defined in a simple and secure way, adhering to DRY
+- All verification should be done as early as possible: at construction time.
+- Abstract classes can not be instanciated.
+- Abstract classes provide common behaviour for interface-implementation.
+- Abstract classes can define "abstract methods" which need to be implemented by extending/implementing classes to become concrete.
+- provide some shortcuts for the work with abstraction in ActionScript (methods in "abstract"-namepsace, code-templates, ...?)
 
 ---
 
