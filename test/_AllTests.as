@@ -11,7 +11,7 @@ package
 		
 		public var _AbstractDefinitionBaseTest:AbstractDefinitionBaseTest;
 		public var _AbstractClassBaseTest:AbstractClassBaseTest;
-		//public var _ImplementationBaseTest:ImplementationBaseTest;
+		public var _ImplementationBaseTest:ImplementationBaseTest;
 		public var _CustomAbstractDefinitionTest:CustomAbstractDefinitionTest;
 	
 	}
