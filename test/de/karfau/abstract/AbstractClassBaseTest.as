@@ -7,22 +7,17 @@ package de.karfau.abstract
 	import org.hamcrest.object.*;
 	import org.hamcrest.text.*;
 	
-	public class AbstractClassBaseTest
+	public class AbstractClassBaseTest extends BaseTest
 	{
 		
-		public var instance:Object;
-		
 		public function get AbstractClass ():Class {
-			return AbstractClassExample;
+			return AbstractExample;
 		}
 		
-		public var error:Error;
-		
 		[Before]
-		public function setUp ():void {
-			assertThat(instance, nullValue());
+		override public function setUp ():void {
+			super.setUp();
 			assertThat(AbstractClass, notNullValue());
-			assertThat(error, nullValue());
 		}
 		
 		[Given("An abstract class")]
@@ -36,22 +31,6 @@ package de.karfau.abstract
 				this.error = error;
 			}
 			verifyErrorTypeAndMessage(AbstractError, [AbstractClass, "abstract"]);
-		}
-		
-		[After]
-		public function tearDown ():void {
-			instance = null;
-			error = null;
-		}
-		
-		protected function verifyErrorTypeAndMessage (expectedType:Class, expectedInMessage:Array):void {
-			//assertTrue(error != null && error is expectedType);
-			assertThat(error, both(notNullValue(), isA(expectedType)));
-			for each (var expected:String in expectedInMessage) {
-				//trace(expected);
-				assertThat(error.message, containsString(expected));
-					//assertTrue(String(error.message).indexOf(expected) > -1);
-			}
 		}
 	
 	}

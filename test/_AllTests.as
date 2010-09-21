@@ -3,6 +3,7 @@ package
 	import de.karfau.abstract.AbstractClassBaseTest;
 	import de.karfau.abstract.AbstractDefinitionBaseTest;
 	import de.karfau.abstract.CustomAbstractDefinitionTest;
+	import de.karfau.abstract.DescribeTypeHelperTest;
 	import de.karfau.abstract.ImplementationBaseTest;
 	
 	[Suite]
@@ -13,6 +14,7 @@ package
 		public var _AbstractClassBaseTest:AbstractClassBaseTest;
 		public var _ImplementationBaseTest:ImplementationBaseTest;
 		public var _CustomAbstractDefinitionTest:CustomAbstractDefinitionTest;
+		public var _DescribeTypeHelperTest:DescribeTypeHelperTest;
 	
 	}
 }

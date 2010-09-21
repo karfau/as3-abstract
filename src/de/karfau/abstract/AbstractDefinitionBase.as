@@ -1,5 +1,9 @@
 package de.karfau.abstract
 {
+	import flash.utils.describeType;
+	import flash.utils.getQualifiedClassName;
+	
+	import org.osmf.metadata.Metadata;
 	
 	/**
 	 * An AbstractDefinition is a class wich "replaces the missing language-feature":
@@ -13,6 +17,10 @@ package de.karfau.abstract
 	 **/
 	public class AbstractDefinitionBase extends Object
 	{
+		
+		private static const verifiedClassNames:Object = {};
+		private const describeAccessors:Object = {readwrite: "get/set ", readonly: "get ", writeonly: "set "};
+		
 		/**
 		 * This Constructor verifies the abstractness of each extending (aka implementing) class because super() is called in each constructor.
 		 *
@@ -23,13 +31,33 @@ package de.karfau.abstract
 		 * @throws AbstractError if the type of the created instance would be equal to abstractClass
 		 */
 		public function AbstractDefinitionBase (abstractClass:Class) {
-			var type:Class = Object(this).constructor;
-			if (abstractClass == null)
-				throw new ArgumentError("abstractClass was " + null);
-			if (!(this is abstractClass))
-				throw new ArgumentError(abstractClass + " is not implemented by " + type);
-			if (type == abstractClass)
-				throw new AbstractError(type + " is abstract", AbstractError.CALLED_ABSTRACT_CONSTRUCTOR);
+			var qcn:String = getQualifiedClassName(this);
+			if (!verifiedClassNames[qcn]) {
+				var type:Class = Object(this).constructor;
+				if (abstractClass == null)
+					throw new ArgumentError("abstractClass was " + null);
+				if (!(this is abstractClass))
+					throw new ArgumentError(abstractClass + " is not implemented by " + type);
+				if (type == abstractClass)
+					throw new AbstractError(type + " is abstract", AbstractError.CALLED_ABSTRACT_CONSTRUCTOR);
+				/*var typeXML:XML = describeType(this);
+					 if (XMLList(typeXML..metadata.(@name == "Abstract")).length() > 0) {
+					 var filtered:Array = [];
+					 var loopXMLList:
+					 for each (var found:XML in typeXML.method.(@declaredBy != qcn)) {
+					 if (XMLList(found.metadata.(@name == "Abstract")).length() > 0) {
+					 filtered[filtered.length] = found.@name[0].toString();
+					 }
+					 }
+					 for each (found in typeXML.accessor) {
+					 if (XMLList(found.metadata.(@name == "Abstract")).length() > 0) {
+					 filtered[filtered.length] = describeAccessors[found.@access[0].toString()] + found.@name[0].toString();
+					 }
+					 }
+					 throw new AbstractError(type + "should be abstract because it doesn't implement the following methods: " + filtered.join(", "));
+				 }*/
+				verifiedClassNames[qcn] = true;
+			}
 		}
 	}
 }

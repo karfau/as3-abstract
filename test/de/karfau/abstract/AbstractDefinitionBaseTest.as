@@ -15,22 +15,17 @@ package de.karfau.abstract
 	import org.hamcrest.object.nullValue;
 	import org.hamcrest.text.containsString;
 	
-	public class AbstractDefinitionBaseTest
+	public class AbstractDefinitionBaseTest extends BaseTest
 	{
-		
-		public var instance:Object;
 		
 		public function get AbstractDefinition ():Class {
 			return AbstractDefinitionBase;
 		}
 		
-		public var error:Error;
-		
 		[Before]
-		public function setUp ():void {
-			assertThat(instance, nullValue());
+		override public function setUp ():void {
+			super.setUp();
 			assertThat(AbstractDefinition, notNullValue());
-			assertThat(error, nullValue());
 		}
 		
 		[Test]
@@ -43,6 +38,7 @@ package de.karfau.abstract
 			} catch (error:Error) {
 				this.error = error;
 			}
+			assertThat(instance, nullValue());
 			verifyErrorTypeAndMessage(ArgumentError, ["Error #1063:", getQualifiedClassName(AbstractDefinition)]);
 		}
 		
@@ -56,6 +52,7 @@ package de.karfau.abstract
 			} catch (error:Error) {
 				this.error = error;
 			}
+			assertThat(instance, nullValue());
 			verifyErrorTypeAndMessage(ArgumentError, ["abstractClass", "" + null]);
 		}
 		
@@ -69,6 +66,7 @@ package de.karfau.abstract
 			} catch (error:Error) {
 				this.error = error;
 			}
+			assertThat(instance, nullValue());
 			verifyErrorTypeAndMessage(ArgumentError, [TypeNotInherited, AbstractDefinition]);
 		}
 		
@@ -82,29 +80,17 @@ package de.karfau.abstract
 			} catch (error:Error) {
 				this.error = error;
 			}
+			assertThat(instance, nullValue());
 			verifyErrorTypeAndMessage(AbstractError, [AbstractDefinition, "abstract"]);
 		}
-		
-		[After]
-		public function tearDown ():void {
-			instance = null;
-			//abstractClassParameter = null;
-			error = null;
-		}
-		
-		//TODO: create custom matcher?
-		protected function verifyErrorTypeAndMessage (expectedType:Class, expectedInMessage:Array):void {
-			//assertTrue(error != null && error is expectedType);
-			assertThat(error, both(notNullValue(), isA(expectedType)));
-			for each (var expected:String in expectedInMessage) {
-				//trace(expected);
-				assertThat(error.message, containsString(expected));
-					//assertTrue(String(error.message).indexOf(expected) > -1);
-			}
-		}
+	
 	}
 }
 
 internal class TypeNotInherited
+{
+}
+
+internal interface INotInherited
 {
 }
