@@ -19,7 +19,6 @@ package de.karfau.abstract
 	{
 		
 		private static const verifiedClassNames:Object = {};
-		private const describeAccessors:Object = {readwrite: "get/set ", readonly: "get ", writeonly: "set "};
 		
 		/**
 		 * This Constructor verifies the abstractness of each extending (aka implementing) class because super() is called in each constructor.
@@ -40,6 +39,16 @@ package de.karfau.abstract
 					throw new ArgumentError(abstractClass + " is not implemented by " + type);
 				if (type == abstractClass)
 					throw new AbstractError(type + " is abstract", AbstractError.CALLED_ABSTRACT_CONSTRUCTOR);
+				
+				const Abstract:String = "Abstract";
+				var dtHelper:DescribeTypeHelper = new DescribeTypeHelper(this);
+				if (dtHelper.hasMetadata(Abstract)) {
+					var unimplemented:Array = dtHelper.getAccessorsWithMetadata(Abstract).
+						concat(dtHelper.getMethodsWithMetadata(Abstract));
+					throw new AbstractError(type + "should be abstract because it doesn't implement the following methods: " + unimplemented.join(", "));
+					
+				}
+				
 				/*var typeXML:XML = describeType(this);
 					 if (XMLList(typeXML..metadata.(@name == "Abstract")).length() > 0) {
 					 var filtered:Array = [];

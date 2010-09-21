@@ -1,11 +1,9 @@
 package de.karfau.abstract
 {
-	import asunit.asserts.assertTrue;
-	
 	import flash.utils.describeType;
 	
 	import org.hamcrest.assertThat;
-	import org.hamcrest.core.both;
+	import org.hamcrest.collection.hasItems;
 	import org.hamcrest.object.equalTo;
 	import org.hamcrest.object.notNullValue;
 	import org.hamcrest.object.nullValue;
@@ -37,6 +35,20 @@ package de.karfau.abstract
 			assertThat("false for unused metadata", helper.hasMetadata("Bindable"), equalTo(false));
 		}
 		
+		[Test]
+		public function can_return_methodNames_by_metadata ():void {
+			//assertTrue();
+			var affectedMethods:Array = helper.getMethodsWithMetadata("Abstract");
+			assertThat(affectedMethods, hasItems("methodOne", "methodTwo"));
+		}
+		
+		[Test]
+		public function can_return_acessorsNames_by_metadata ():void {
+			//assertTrue();
+			var affectedMethods:Array = helper.getAccessorsWithMetadata("Abstract");
+			assertThat(affectedMethods, hasItems("get attributeGet", "get/set attributeSetGet"));
+		}
+		
 		[After]
 		public override function tearDown ():void {
 			super.tearDown();
@@ -57,6 +69,15 @@ internal class TestObject
 		return false;
 	}
 	
+	[Abstract]
+	public function methodTwo (param:String):Boolean {
+		return false;
+	}
+	
+	public function methodThree (param:String):Boolean {
+		return false;
+	}
+	
 	public var attributePure:int;
 	private var _attributeSetGet:Number;
 	
@@ -66,6 +87,23 @@ internal class TestObject
 	}
 	
 	public function set attributeSetGet (value:Number):void {
+		_attributeSetGet = value;
+	}
+	
+	public function get attributeSetGet2 ():Number {
+		return _attributeSetGet;
+	}
+	
+	[Abstract]
+	public function get attributeGet ():Number {
+		return _attributeSetGet;
+	}
+	
+	public function set attributeSetGet2 (value:Number):void {
+		_attributeSetGet = value;
+	}
+	
+	public function set attributeSet (value:Number):void {
 		_attributeSetGet = value;
 	}
 }

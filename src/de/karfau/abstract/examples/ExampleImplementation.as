@@ -1,39 +1,22 @@
 package de.karfau.abstract.examples
 {
 	
-	public class ExampleImplementation extends AbstractExample
+	public class ExampleImplementation extends AbstractExample implements IExample
 	{
 		
-		private var _testing:Boolean;
-		
-		public function get testing ():Boolean {
-			return _testing;
-		}
-		
-		public function set testing (value:Boolean):void {
-			_testing = value;
-		}
-		
-		public function ExampleImplementation () {
-			super();
-		}
+		private var _aValue:Object;
 		
 		public override function get aValue ():Object {
-			return super.aValue;
+			return _aValue;
 		}
 		
-		/*public override function set aValue (value:Object):void {
-			 //TODO Auto-generated method stub
-			 super.aValue = value;
-		 }*/
-		
-		public function set anotherValue (value:Object):void {
-			//TODO Auto-generated method stub
-			super.aValue = value;
+		public override function set aValue (value:Object):void {
+			_aValue = value;
 		}
 		
-		public function doSomthingElse (test:String):String {
-			return "else";
+		public override function doSomething (one:String, ... two):void {
+		/*some logic without calling super.doSomething()*/
 		}
+	
 	}
 }

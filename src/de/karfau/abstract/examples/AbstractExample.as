@@ -28,14 +28,13 @@ package de.karfau.abstract.examples
 			super(AbstractExample);
 		}
 		
-		[Abstract]
 		public function get aValue ():Object {
 			throw new IllegalOperationError("'get aValue' is abstract", AbstractError.CALLED_ABSTRACT_METHOD);
 		}
 		
 		[Abstract]
 		public function set aValue (value:Object):void {
-			throw new IllegalOperationError("'get aValue' is abstract", AbstractError.CALLED_ABSTRACT_METHOD);
+			throw new IllegalOperationError("'set aValue' is abstract", AbstractError.CALLED_ABSTRACT_METHOD);
 		}
 		
 		[Abstract]
